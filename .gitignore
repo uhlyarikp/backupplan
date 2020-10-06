@@ -1,3 +1,5 @@
 .project
 /.settings/
 /.well-known/
+/config/email.ini
+/config/db.ini
