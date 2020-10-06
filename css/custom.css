@@ -1,0 +1,277 @@
+:root {
+/*345D97*/
+/*38B90A*/
+  --custom1-color: #345D97;
+}
+
+.container, .container-lg, .container-md, .container-sm, .container-xl{
+  max-width:95%;
+}
+
+.bg-custom1
+{
+	background-color: var(--custom1-color);
+	color: #FFF;
+}
+
+.text-custom1
+{
+	color: var(--custom1-color);
+}
+
+.table-striped tbody tr:nth-of-type(2n+1){
+	background-color: var(--custom1-color);
+	color: #FFF;
+}
+
+.inactive-row{
+	opacity:0.5;
+}
+
+.text-page
+{
+  background-color: #FFF;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.sticker-input {
+  text-align:center;
+}
+
+#searchForm label.error {
+  margin-left: 10px;
+  width: auto;
+  display: inline;
+}
+
+footer{
+  display:flex;
+  padding: 10px 0 10px 0;
+  border-top: 1px solid #FFF;
+  background-color: var(--custom1-color);
+}
+
+.main-wrapper {
+  height: 100vh;
+}
+
+h1{
+  font-size:2rem;
+}
+.container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.border-custom1
+{
+  border:1px solid var(--custom1-color);
+}
+
+.btn-custom1
+{
+  color:#FFF;
+  background-color:var(--custom1-color);
+  border:1px solid var(--custom1-color);
+}
+
+.btn-custom1:hover
+{
+  color:var(--custom1-color);
+  background-color:#FFF;
+  border:1px solid var(--custom1-color);
+}
+
+.btn-custom1-outline
+{
+    color: var(--custom1-color);
+  background-color:#FFF;
+  border-color:var(--custom1-color);
+}
+
+:root {
+  --custom1-color: #20ab84;
+  --custom1-txt-color: #FFF;
+  --custom1-padding: 15px;
+}
+
+.required-field:after{
+  content:" *";
+  color: #FF0000;
+}
+
+
+#previewDiv{
+  top:10px;
+  position:fixed;
+  display:none;
+  width:calc(98% - 4px);
+  margin: 0 1% 0 1%;
+  height:600px;
+  max-heigh:100%;
+  overflow:auto;
+  background:lightgray;
+  padding:0;
+  border:2px solid teal;
+  z-index:1000;
+}
+
+#previewDivHead{
+  width:calc(100% - 3px);
+  text-align:right;
+  background:teal;
+  padding: 3px 3px 3px 0;
+}
+
+#previewDivContent{
+  padding:5px 10px;
+}
+
+.jumbotron{
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  border-radius: 0;
+}
+
+.price,
+.postalcode{
+  width:7rem;
+}
+
+.w-3
+{
+  width:3rem;
+}
+
+.w-5
+{
+  width:5rem;
+}
+
+.table .thead-custom1 th {
+  color:#FFF;
+  background-color:var(--custom1-color);
+    border-color: var(--custom1-color);
+}
+
+.ui-autocomplete{
+    z-index:1050;
+}
+
+.stickersid{
+	cursor:pointer;
+}
+
+.modal-dialog{
+  max-width:80%;
+}
+
+.page-item.active .page-link {
+    background-color: var(--custom1-color);
+    border-color: var(--custom1-color);
+}
+
+.page-link{
+  color:var(--custom1-color);
+}
+
+.plan-card{
+  cursor: pointer;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+  border:none;
+  background: transparent;
+  font-weight:600;
+  color: #59bee6;
+}
+
+.ui-menu .ui-menu-item-wrapper:hover,
+.ui-menu .ui-menu-item-wrapper.ui-state-active {
+    color: #FFF;
+    background-color: var(--custom1-color);
+    border: #fff 1px solid;
+}
+
+.btn-back{
+    color: #FFF;
+    background-color: #dc3545;
+    border-color: #FFF;
+}
+
+.btn-back:hover{
+    color: #dc3545;
+    background-color: #FFF;
+    border-color: #FFF;
+}
+
+@media (min-width: 544px) {
+    .card-columns {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-columns {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+}
+
+.msgnum {
+    position: relative;
+    top: -18px;
+    float: right;
+    min-width: 12px;
+    text-align: right;
+}
