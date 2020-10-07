@@ -56,23 +56,40 @@ class mailsender extends application{
 	}// end private function init(){
 
 	function sendBackups(){
-//		$this->mailer->addAddress($this->backupAddress);
-		$this->mailer->addAddress($this->backupAddressDev);
-		$files = getDirContent(backupsPath);
-		if ($files != 0){
-			foreach ($files as $element){
-				if ($element != 'plan.json'){
-					$this->mailer->Body = $element." backup file";
-					$this->mailer->Subject = $element." backup file";
-					$this->mailer->addAttachment(backupsPath.$element);
+		$planData = json_decode(readFileContent(datasPath.backupPlanFile),true);
+		if (isset($planData['dbs']) && count($planData['dbs'])!= 0){
+			foreach ($planData['dbs'] as $key=>$value){
+				if (isset($planData['email'][$key]) && $planData['email'][$key]!='' ){
+					if ( is_file(backupsPath.$key.'.sql.gz')){
+						$this->mailer->clearAllRecipients();
+						$this->mailer->addAddress($planData['email'][$key]);
+						$this->mailer->Body = $key." backup file";
+						$this->mailer->Subject = $key." backup file";
+						$this->mailer->addAttachment(backupsPath.$key.'.sql.gz');
+						try{
+//							echo "<p>$key trying to send to: ".$planData['email'][$key]."</p>";
+							if (!$this->mailer->Send()){
+								writeErrorLog(__FILE__, __LINE__, 'Error mail db backup sending process', false);
+//								echo "<p>Error on mail sending process</p>";
+//								exit;
+							}else{
+								writeLog("Backup of '$key' database sent to: ".$planData['email'][$key]);
+
+							}
+						}catch (Exception $e) {
+							writeErrorLog(__FILE__, __LINE__, $e->errorMessage(), false);
+						}
+					}else{
+						//echo "<p>Backup file not found</p>";
+					}
+				}else{
+					//echo "<p>'$key' database has empty email address.</p>";
 				}
 			}
-			try{
-				$this->mailer->Send();
-			}catch (Exception $e) {
-				echo $e->errorMessage();
-			}
+		}else{
+//			echo 'Empty database datas';
 		}
+		exit;
 	}// end function sendTempPassword($userdata, $tmpPwd, $templateData){
 
 }// end class mailsender

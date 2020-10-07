@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
-  <a class="navbar-brand" href="<?=base_url()?>"><?=$this->lbl_websitename?></a>
+  <a class="navbar-brand" href="<?=base_url()?>"><?=$this->lbl_shortwebsitename?></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,7 +9,7 @@
 	if ($this->loggedIn()){
 ?>
       <li class="nav-item active">
-          <a class="nav-link" href="backupplan">Backup plan</a>
+          <a class="nav-link" href="backupplan"><?=$this->lbl_databasebackupsettings?></a>
       </li>
 <?php
 	}else{

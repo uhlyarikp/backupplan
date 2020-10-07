@@ -2,6 +2,7 @@
 <?php
 csrfFormTokenInput('planform');
 ?>
+<a href="<?=base_url()?>mailsender/sendbackups" class="btn btn-custom1-outline">Mentések küldése</a>
 <div class="table-responsive">
 	<table id="listTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
 		<tr>
@@ -13,8 +14,8 @@ csrfFormTokenInput('planform');
 					</div>
 				</div>
 			</th>
-			<th>
-			</th>
+			<th><?=$this->lbl_email?></th>
+			<th><?=$this->lbl_backupfile?></th>
 		</tr>
 <?php
 		if ($dbData != false){
@@ -26,9 +27,9 @@ csrfFormTokenInput('planform');
 					<td>
 					<div class="form-group">
 						<div class="form-check">
-							<input type="checkbox" class="form-check-input planchk" id="plan<?=$i?>" name="planform_tables[]" value="<?=$element?>"
+							<input type="checkbox" class="form-check-input planchk" id="plan<?=$i?>" name="planform_dbs[<?=$element?>]" value="1"
 							<?php
-							if (is_array($planData) && in_array($element,$planData)) echo 'checked="checked"';
+							if (isset($planData['dbs'][$element])) echo 'checked="checked"';
 							?>
 							/>
 							<label for="plan<?=$i?>"><?=$element?></label>
@@ -36,19 +37,25 @@ csrfFormTokenInput('planform');
 					</div>
 					</td>
 					<td>
+						<div class="form-group">
+						    <input type="text" class="form-control" id="loginname<?=$i?>" name="planform_email[<?=$element?>]" maxlength="80" value="<?php if (isset($planData['email'][$element]) && $planData['email'][$element]!='') {echo $planData['email'][$element];}?>"/>
+						</div>
+					</td>
+					<td>
 					<?php
 					if (is_file(backupsPath.$element.'.sql.gz')){
-						echo '<a href="'.base_url().'backups/'.$element.'.sql.gz'.'">'.$element.'.sql.gz'.'</a>';
+						echo '<a href="'.base_url().str_replace(rootPath,'',backupsPath).$element.'.sql.gz'.'">'.$element.'.sql.gz'.'</a>';
+						echo '<br />';
+						echo date("Y-m-d H:i:s", filemtime(backupsPath.$element.'.sql.gz'));
 					}
 					?>
 					</td>
 				</tr>
 <?php
-				}
 				$i++;
-			}
-
-		}
+				}// end if (!in_array($element, $excludeDb)){
+			}// end foreach ($dbData as $element){
+		}// end if ($dbData != false){
 ?>
 	</table>
 </div>
@@ -61,5 +68,3 @@ csrfFormTokenInput('planform');
 </div>
 
 </form>
-
-

@@ -28,6 +28,7 @@ class loginControl extends users {
 				$_SESSION['userdata'] = $res;
 				unset($_SESSION['userdata']['password']);
 				$_SESSION['userdata']['loggedin'] = 1;
+				$_SESSION['adminroute'] = "";
 				$session->regenerateId();
 				$this->token->setToken(1);
 				Redirect(base_url().'backupplan');

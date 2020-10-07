@@ -1,6 +1,6 @@
 <?php
 function base_url(){
-	if (PATH!='/'){
+	if (PATH!=''){
 //	if ($_SERVER['SERVER_NAME']=='localhost'){
 		$hostdir = explode('/',$_SERVER['REQUEST_URI']);
 		$hostdir = '/'.$hostdir[1].'/';
@@ -14,7 +14,7 @@ function base_url(){
 		return sprintf(
 	    	"%s://%s%s",
 			isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
-			$_SERVER['SERVER_NAME'],''
+			$_SERVER['SERVER_NAME'],'/'
 		);
 	}
 }
@@ -327,6 +327,14 @@ function writeErrorLog( $file, $line, $errorMessage, $stop = true ){
 	}
 }
 
+function writeLog( $message ){
+	if (!is_dir(rootPath.'log')) mkdir(rootPath.'log',0755);
+	$f = fopen(rootPath.'log/activity.log','a');
+	$log = "[".date("Y-m-d H:i:s")."] ";
+	$log .= $message."\r\n";
+	fwrite($f,$log);
+	fclose($f);
+}
 
 
 function xssSafe($str){
@@ -387,4 +395,45 @@ function sqlSafe($str){
 	$tmp = removeHex($str);
 	$tmp = removeSqlInjection($tmp);
 	return $tmp;
+}
+
+function create_zip($files = array(),$destination = '',$overwrite = false) {
+	//if the zip file already exists and overwrite is false, return false
+	if(file_exists($destination) && !$overwrite) { return false; }
+	//vars
+	$valid_files = array();
+	//if files were passed in...
+	if(is_array($files)) {
+		//cycle through each file
+		foreach($files as $file) {
+			//make sure the file exists
+			if(file_exists($file)) {
+				$valid_files[] = $file;
+			}
+		}
+	}
+	//if we have good files...
+	if(count($valid_files)) {
+		//create the archive
+		$zip = new ZipArchive();
+		if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
+			return false;
+		}
+		//add the files
+		foreach($valid_files as $file) {
+			$zip->addFile($file,$file);
+		}
+		//debug
+		//echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
+
+		//close the zip -- done!
+		$zip->close();
+
+		//check to make sure the file exists
+		return file_exists($destination);
+	}
+	else
+	{
+		return false;
+	}
 }

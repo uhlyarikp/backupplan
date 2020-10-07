@@ -61,16 +61,19 @@ class application
     // end function getFormdataFromPost
     function loadModel()
     {
-        if ($this->uri['model'] == '') {
-            $this->defaultView();
-        } else {
-            $file = modelPath . $this->uri['model'] . ".php";
-            if (! file_exists($file)) {
-                $this->loadView('error',array("errorMsg"=>$this->lbl_themodeldoesnotexist));
-            } else {
-                require_once ($file);
-            }
-        }
+		if (!is_file(viewPath.'staticpages/'.$this->uri['model'].'.php')){
+	        if ($this->uri['model'] == '') {
+	            $this->defaultView();
+	        } else {
+	            $file = modelPath . $this->uri['model'] . ".php";
+	            if (! file_exists($file)) {
+	                $this->loadView('error',array("errorMsg"=>$this->lbl_themodeldoesnotexist));
+	            } else {
+	                require_once ($file);
+	            }
+	        }
+		}
+
     }
 
     function loadController()

@@ -10,7 +10,6 @@ include_once('navigation.php');
 ?>
 <div class="jumbotron text-center bg-custom1 text-white">
   <h1 class="main-title"><?=$this->lbl_websitename?></h1>
-  <p class="main-sub-title"><?=$this->lbl_headsubtitle?></p>
 </div>
 
 <div class="container">

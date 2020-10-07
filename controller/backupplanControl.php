@@ -21,8 +21,8 @@ class backupPlanControl extends backupplan{
 			$this->loadView('error',array('errorMsg'=>$this->lbl_tokenerror));
 	    }
 		$formdata = $this->getFormdataFromPost('planform',$_POST);
-		$f = fopen(backupsPath.$this->backupPlanFile, "w");
-		fwrite($f, json_encode($formdata['tables']));
+		$f = fopen(datasPath.backupPlanFile, "w");
+		fwrite($f, json_encode($formdata));
 		fclose($f);
 		Redirect(base_url().'backupplan/makebackupfiles');
 	}// end public function defaultView(){

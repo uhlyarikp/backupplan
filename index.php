@@ -23,5 +23,6 @@ if (!$application->loggedIn() && $request['model']!='login'){
 }
 $application->loadModel($request);
 $application->loadController();
+
 ?>
 

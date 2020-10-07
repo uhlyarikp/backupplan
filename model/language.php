@@ -11,10 +11,9 @@ if (defined('pageLang')){
 	}else{
 		include_once(languagePath.defaultLang.'.php');
 	}
-}
-else
+}else
 {
-	include_once(languagePath.'en.php');
+	include_once(languagePath.defaultLang.'.php');
 }
 
 ?>

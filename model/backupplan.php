@@ -9,25 +9,29 @@ require_once('application.php');
 require_once('token.php');
 
 class backupPlan extends application{
-	public $backupPlanFile = 'plan.json';
 	public $planData = [];
 	public $dbExpUser;
 	public $dbExpPassword;
 	public $_listConn;
 
 	public function __construct(){
-		if (is_file(backupsPath.$this->backupPlanFile)){
-			$this->planData = json_decode(readFileContent(backupsPath.$this->backupPlanFile),true);
+		if (is_file(datasPath.backupPlanFile)){
+			$this->planData = json_decode(readFileContent(datasPath.backupPlanFile),true);
 		}
 		$dbSettings = parse_ini_file(configPath . "db.ini");
-		extract($dbSettings,EXTR_PREFIX_SAME, "sep");
+		extract($dbSettings,EXTR_PREFIX_SAME, "dsep");
+
+		$emailSettings = parse_ini_file(configPath . "email.ini");
+		extract($emailSettings,EXTR_PREFIX_SAME, "esep");
 
 		if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME']=='localhost'){
 			$this->dbExpUser = $dbExpUser = $dbExpUser_dev;
 			$this->dbExpPassword = $dbExpPassword = $dbExpPassword_dev;
+			$this->backupAddress = $backupAddressDev;
 		}else{
 			$this->dbExpUser = $dbExpUser;
 			$this->dbExpPassword = $dbExpPassword;
+			$this->backupAddress = $backupAddress;
 		}
         $this->token = new token();
 
@@ -72,13 +76,25 @@ class backupPlan extends application{
 		return $dbData;
 	}
 
+
+
 	public function createBackups(){
 		if (count($this->planData)!=0){
-			foreach ($this->planData as $element){
-				$command = 'mysqldump --opt --user="'.$this->dbExpUser.'" --password="'.$this->dbExpPassword.'" '.$element.' | gzip >  /home/tonerkoz/backupplan.mobil-tartozek.hu/backups/'.$element.'.sql.gz';
+			foreach ($this->planData['dbs'] as $key => $value){
+//				$command = 'mysqldump --opt --user="'.$this->dbExpUser.'" --password="'.$this->dbExpPassword.'" '.$key.' | gzip >  /home/tonerkoz/backupplan.mobil-tartozek.hu/backups/'.$key.'.sql.gz';
+				$command = 'mysqldump --opt --user="'.$this->dbExpUser.'" --password="'.$this->dbExpPassword.'" '.$key.' | gzip > '.backupsPath.$key.'.sql.gz';
+//				$command = 'mysqldump --opt --user="'.$this->dbExpUser.'" --password="'.$this->dbExpPassword.'" '.$key.' > '.rootPath.'backups/'.$key.'.sql';
+				$escaped_command = escapeshellcmd($command);
 				exec($command);
 			}
 		}
+
+		$files = getDirContent(backupsPath);
+		foreach ($files as $element){
+			if (create_zip(array(backupsPath.$element.'.sql'),backupsPath.$element.'.sql.zip',true))
+				unlink(backupsPath.$element);
+		}
+
 	}// end public function createBackup(){
 
 }

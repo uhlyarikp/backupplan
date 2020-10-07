@@ -10,3 +10,5 @@
 [2020-10-05 15:08:26] Error in C:\Apache24\htdocs\mdb_backup\model\dbo.php Line: 108; PDOException: SQLSTATE[HY000] [1045] Access denied for user 'tonerkoz_expDB'@'localhost' (using password: YES)
 [2020-10-05 15:08:45] Error in C:\Apache24\htdocs\mdb_backup\model\dbo.php Line: 108; PDOException: SQLSTATE[HY000] [1045] Access denied for user 'tonerkoz_expDB'@'localhost' (using password: YES)
 [2020-10-05 15:08:55] Error in C:\Apache24\htdocs\mdb_backup\model\dbo.php Line: 107; PDOException: SQLSTATE[HY000] [1045] Access denied for user 'tonerkoz_expDB'@'localhost' (using password: YES)
+[2020-10-07 09:53:12] Error in C:\Apache24\htdocs\backupplan\model\dbo.php Line: 60; PDOException: SQLSTATE[HY000] [2019] Unknown character set
+[2020-10-07 09:57:51] Error in C:\Apache24\htdocs\backupplan\model\dbo.php Line: 60; PDOException: SQLSTATE[HY000] [2019] Unknown character set

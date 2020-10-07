@@ -8,7 +8,7 @@
 
 include_once(viewPath.'header.php');
 ?>
-<title><?=$this->lbl_settings?></title>
+<title><?=$this->lbl_databasebackupsettings?></title>
 
 
 </head>
@@ -17,7 +17,7 @@ include_once(viewPath.'header.php');
 	include_once(viewPath.'navigation.php');
 ?>
 <div class="container">
-<h1 class="main-title text-primary"><?=$this->lbl_settings?></h1>
+<h1 class="main-title text-primary"><?=$this->lbl_databasebackupsettings?></h1>
 
 <?php
 	$this->loadForm('backupplan/backupplan-form',$params);

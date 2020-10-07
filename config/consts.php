@@ -10,11 +10,15 @@ $docRoot = realpath(str_replace("\\", "/", dirname(__FILE__)) . '/../') . '/';
 // path in the $_SERVER['REQUEST_URI']
 // THE PATH CANNOT BE THE SAME AS ONE OF THE MODULES OR METHODS NAMES OR PART OF THE MODULES OR METHODS NAMES!
 // e.g.: /dyfm IS A VALID PATH NAME, /sticker ISN'T
-define("PATH", "/mdb_backup/");
+define("PATH", "/backupplan/");
 // root directory path
 define("rootPath",$docRoot);
 // backups directory path
 define("backupsPath", rootPath . "backups/");
+// json data files directory path
+define("datasPath", rootPath . "datas/");
+// json backup plan file name
+define('backupPlanFile','plan.json');
 // tmp directory path
 define("tmpPath", rootPath . "tmp/");
 // config files path
@@ -33,7 +37,7 @@ define("currenciesData", array("EUR","GBP","HUF","USD"));
 // supported languages
 define("languagesData", array("en","hu","de"));
 // default page language
-define("defaultLang", "en");
+define("defaultLang", "hu");
 // default hash method for generating token and password hashing
 // DO NOT CHANGE THIS VALUE AFTER THE FIRST USER INSERTED
 define("defaultHashMethod","sha512");

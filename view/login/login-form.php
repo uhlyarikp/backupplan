@@ -14,5 +14,4 @@
 			</div>
 	</div>
 		<input type="submit" name="submit" class="btn btn-primary" value="<?=$this->lbl_login?>" />
-		<a href="forgotpassword"><?=$this->lbl_forgotpassword?></a>
 </form>
